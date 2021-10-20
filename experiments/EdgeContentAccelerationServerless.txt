@@ -1,0 +1,32 @@
+exports.handler= (event, context, callback) => {
+
+    console.log("Request Event:" + JSON.stringify(event, null, 2));
+  
+    const requestHeaders = event.Records[0].cf.request.headers;
+    
+    var htmlContent;
+    
+    //Insert code to generate the html content here.
+    
+    const response = {
+        status: '200',
+        statusDescription: 'OK',
+        headers: {
+            'cache-control': [{
+                key: 'Cache-Control',
+                value: 'max-age=100'
+            }],
+            'content-type': [{
+                key: 'Content-Type',
+                value: 'text/html'
+            }],
+            'content-encoding': [{
+                key: 'Content-Encoding',
+                value: 'UTF-8'
+            }],
+        },
+        body: htmlContent,
+    };
+        
+    callback(null, response);
+}
